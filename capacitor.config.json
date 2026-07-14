@@ -1,0 +1,9 @@
+{
+  "appId": "com.toolbox.app",
+  "appName": "Toolbox",
+  "webDir": "www",
+  "backgroundColor": "#F3F3F8",
+  "server": {
+    "androidScheme": "https"
+  }
+}

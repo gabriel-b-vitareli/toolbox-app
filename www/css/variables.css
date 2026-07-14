@@ -1,0 +1,81 @@
+/*
+  variables.css
+  Tokens de design da Toolbox - modo claro.
+  Toda cor, espacamento e raio usados no app devem vir daqui.
+  Isso garante consistencia visual e facilita a criacao do modo escuro no futuro.
+*/
+
+:root {
+  /* Cores base */
+  --color-bg: #F3F3F8;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F8F8FC;
+
+  --color-primary: #6C5CE7;
+  --color-primary-dark: #5A48D8;
+  --color-on-primary: #FFFFFF;
+
+  --color-text-primary: #17161C;
+  --color-text-secondary: #8B8B96;
+  --color-text-tertiary: #B4B4BE;
+
+  --color-border: #ECECF2;
+  --color-divider: #EFEFF4;
+
+  /* Cores de destaque usadas por icones de ferramentas e categorias */
+  --accent-purple: #6C5CE7;
+  --accent-purple-soft: #EDEBFC;
+
+  --accent-orange: #FF9F43;
+  --accent-orange-soft: #FFF1E0;
+
+  --accent-green: #2ECC71;
+  --accent-green-soft: #E7F9EF;
+
+  --accent-blue: #4A90E2;
+  --accent-blue-soft: #E8F1FC;
+
+  --accent-magenta: #A855F7;
+  --accent-magenta-soft: #F5EAFE;
+
+  --accent-gray: #8B8B96;
+  --accent-gray-soft: #ECECF1;
+
+  /* Tipografia */
+  --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --fs-title: 1.75rem;
+  --fs-subtitle: 0.875rem;
+  --fs-section: 1.125rem;
+  --fs-body: 0.95rem;
+  --fs-label: 0.9rem;
+  --fs-caption: 0.8rem;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Espacamento */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 20px;
+  --space-xl: 28px;
+  --space-2xl: 36px;
+
+  /* Raios (Material Design 3 usa cantos bem arredondados) */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* Sombras */
+  --shadow-card: 0 1px 3px rgba(23, 22, 28, 0.05), 0 1px 2px rgba(23, 22, 28, 0.04);
+  --shadow-elevated: 0 4px 16px rgba(23, 22, 28, 0.08);
+
+  /* Layout */
+  --bottom-nav-height: 76px;
+  --max-content-width: 480px;
+}
