@@ -1,6 +1,6 @@
 {
   "name": "toolbox",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "Central de utilidades - conversores, calculadoras, geradores e ferramentas do dispositivo em um so app.",
   "scripts": {
     "start": "npx serve www",

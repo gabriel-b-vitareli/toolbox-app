@@ -17,6 +17,7 @@
 
 import { icons } from "../../core/icons.js";
 import { registry } from "../../core/registry.js";
+import { getUserMediaWithRetry } from "../../core/media-access.js";
 
 function render(container) {
   container.innerHTML = `
@@ -48,7 +49,7 @@ function render(container) {
   async function ensureStream() {
     if (stream) return true;
     try {
-      stream = await navigator.mediaDevices.getUserMedia({
+      stream = await getUserMediaWithRetry({
         video: { facingMode: { ideal: "environment" } },
       });
       track = stream.getVideoTracks()[0];

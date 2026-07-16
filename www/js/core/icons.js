@@ -227,4 +227,84 @@ export const icons = {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M9 2.5h6l-1 5h2.5L10 21.5v-8H7.5l1-5H8Z"/>
     </svg>`,
+
+  compass: () => `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9.5"/>
+      <polygon points="15 9 13 13 9 15 11 11 15 9" fill="currentColor" stroke="none"/>
+    </svg>`,
+
+  waveform: () => `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="3" y1="12" x2="3" y2="12.01"/>
+      <line x1="6.5" y1="8" x2="6.5" y2="16"/>
+      <line x1="10" y1="4.5" x2="10" y2="19.5"/>
+      <line x1="13.5" y1="7" x2="13.5" y2="17"/>
+      <line x1="17" y1="9.5" x2="17" y2="14.5"/>
+      <line x1="20.5" y1="11" x2="20.5" y2="13"/>
+    </svg>`,
+
+  speedometer: () => `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 16.5a8 8 0 1 1 15 0"/>
+      <line x1="12" y1="13" x2="16.5" y2="8.5"/>
+      <circle cx="12" cy="13" r="1.2"/>
+      <line x1="4" y1="19.5" x2="20" y2="19.5"/>
+    </svg>`,
+
+  dice: () => `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="4"/>
+      <circle cx="8" cy="8" r="1.3" fill="currentColor" stroke="none"/>
+      <circle cx="16" cy="8" r="1.3" fill="currentColor" stroke="none"/>
+      <circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/>
+      <circle cx="8" cy="16" r="1.3" fill="currentColor" stroke="none"/>
+      <circle cx="16" cy="16" r="1.3" fill="currentColor" stroke="none"/>
+    </svg>`,
+
+  cake: () => `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 21v-7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v7"/>
+      <path d="M4 21h16"/>
+      <path d="M4 17.5c1.2 1 2.3 1 3.5 0s2.3-1 3.5 0 2.3 1 3.5 0 2.3-1 3.5 0"/>
+      <line x1="8" y1="12" x2="8" y2="8"/>
+      <line x1="12" y1="12" x2="12" y2="8"/>
+      <line x1="16" y1="12" x2="16" y2="8"/>
+      <path d="M8 4.5c0 1-1 1-1 2s1 1.5 1 1.5"/>
+      <path d="M12 4.5c0 1-1 1-1 2s1 1.5 1 1.5"/>
+      <path d="M16 4.5c0 1-1 1-1 2s1 1.5 1 1.5"/>
+    </svg>`,
+
+  percent: () => `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="19" y1="5" x2="5" y2="19"/>
+      <circle cx="6.5" cy="6.5" r="2.5"/>
+      <circle cx="17.5" cy="17.5" r="2.5"/>
+    </svg>`,
+
+  stopwatch: () => `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="13.5" r="8"/>
+      <line x1="12" y1="13.5" x2="12" y2="9"/>
+      <line x1="12" y1="13.5" x2="15" y2="15"/>
+      <line x1="9.5" y1="1.5" x2="14.5" y2="1.5"/>
+      <line x1="12" y1="1.5" x2="12" y2="4.2"/>
+    </svg>`,
+
+  textCase: () => `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 18 7.5 6l4.5 12"/>
+      <line x1="4.3" y1="14" x2="10.7" y2="14"/>
+      <circle cx="18" cy="14.5" r="3.5"/>
+      <line x1="21.5" y1="11.5" x2="21.5" y2="18"/>
+    </svg>`,
+
+  vibrate: () => `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="8" y="4" width="8" height="16" rx="2"/>
+      <line x1="2.5" y1="9" x2="2.5" y2="15"/>
+      <line x1="5" y1="7" x2="5" y2="17"/>
+      <line x1="21.5" y1="9" x2="21.5" y2="15"/>
+      <line x1="19" y1="7" x2="19" y2="17"/>
+    </svg>`,
 };

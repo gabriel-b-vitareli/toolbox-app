@@ -25,6 +25,9 @@ const checks = {
   camera: () =>
     typeof navigator !== "undefined" && !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia),
 
+  microphone: () =>
+    typeof navigator !== "undefined" && !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia),
+
   vibration: () => typeof navigator !== "undefined" && "vibrate" in navigator,
 };
 

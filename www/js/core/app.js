@@ -31,9 +31,19 @@ import "../tools/massa/index.js";
 import "../tools/temperatura/index.js";
 import "../tools/area/index.js";
 import "../tools/volume/index.js";
+import "../tools/velocidade/index.js";
 import "../tools/nivel/index.js";
 import "../tools/lanterna/index.js";
+import "../tools/bussola/index.js";
+import "../tools/vibracao/index.js";
+import "../tools/decibelimetro/index.js";
+import "../tools/cronometro/index.js";
 import "../tools/senha/index.js";
+import "../tools/sorteador/index.js";
+import "../tools/calculadora/index.js";
+import "../tools/idade/index.js";
+import "../tools/desconto/index.js";
+import "../tools/texto/index.js";
 
 // -----------------------------------------------------------------------
 // Telas

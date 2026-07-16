@@ -607,6 +607,86 @@
   max-width: 260px;
 }
 
+.level-mode-badge {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-secondary);
+  background: var(--color-surface-alt);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+}
+
+/* Tubos de bolha - modo "deitado", visual de nivel de bolha classico */
+.level-tube-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  width: 100%;
+  max-width: 280px;
+}
+
+.level-tube {
+  position: relative;
+  width: 100%;
+  height: 48px;
+  background: var(--color-surface);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.level-tube__marks {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 2px;
+  height: 26px;
+  background: var(--color-border);
+}
+
+.level-tube__marks::before,
+.level-tube__marks::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 26px;
+  background: var(--color-border);
+}
+
+.level-tube__marks::before {
+  left: -20px;
+}
+
+.level-tube__marks::after {
+  left: 20px;
+}
+
+.level-tube__bubble {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  box-shadow: 0 2px 6px rgba(74, 144, 226, 0.45);
+  transition: background-color 0.15s ease;
+}
+
+.level-tube__bubble[data-flat="true"] {
+  background: var(--accent-green);
+  box-shadow: 0 2px 6px rgba(46, 204, 113, 0.45);
+}
+
+.level-tube__label {
+  font-size: var(--fs-caption);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-xs);
+}
+
 .btn-primary {
   background: var(--color-primary);
   color: #fff;
@@ -736,6 +816,213 @@
   height: 18px;
 }
 
+/* ---------- Bussola ---------- */
+.compass-widget {
+  padding: var(--space-xl) var(--space-md) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.compass-dial {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  max-width: 68vw;
+  max-height: 68vw;
+}
+
+/* Anel de marcacoes finas (a cada 6 graus) ao redor do mostrador */
+.compass-dial::before {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    var(--color-border) 0deg 1deg,
+    transparent 1deg 6deg
+  );
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 9px), #000 calc(100% - 9px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 9px), #000 calc(100% - 9px));
+}
+
+/* Anel de marcacoes grossas (a cada 30 graus) por cima das finas */
+.compass-dial::after {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    var(--color-text-tertiary) 0deg 2deg,
+    transparent 2deg 30deg
+  );
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 11px), #000 calc(100% - 11px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 11px), #000 calc(100% - 11px));
+}
+
+.compass-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 38%, var(--color-surface) 0%, var(--color-surface-alt) 100%);
+  box-shadow: var(--shadow-elevated), inset 0 0 0 1px var(--color-border);
+  transition: transform 0.12s linear;
+}
+
+.compass-needle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 76%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+}
+
+.compass-needle__half {
+  flex: 1;
+}
+
+.compass-needle__half--n {
+  background: var(--accent-orange);
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+
+.compass-needle__half--s {
+  background: var(--color-text-tertiary);
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+}
+
+.compass-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-secondary);
+}
+
+.compass-label--n {
+  top: 12%;
+  left: 50%;
+  font-size: 1.05rem;
+  color: #fff;
+  background: var(--accent-orange);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(255, 159, 67, 0.5);
+}
+
+.compass-label--s {
+  top: 88%;
+  left: 50%;
+  font-size: 1rem;
+}
+
+.compass-label--l {
+  top: 50%;
+  left: 88%;
+  font-size: 1rem;
+}
+
+.compass-label--o {
+  top: 50%;
+  left: 12%;
+  font-size: 1rem;
+}
+
+.compass-label--ne {
+  top: 22%;
+  left: 78%;
+  font-size: 0.75rem;
+  color: var(--color-text-tertiary);
+}
+
+.compass-label--se {
+  top: 78%;
+  left: 78%;
+  font-size: 0.75rem;
+  color: var(--color-text-tertiary);
+}
+
+.compass-label--so {
+  top: 78%;
+  left: 22%;
+  font-size: 0.75rem;
+  color: var(--color-text-tertiary);
+}
+
+.compass-label--no {
+  top: 22%;
+  left: 22%;
+  font-size: 0.75rem;
+  color: var(--color-text-tertiary);
+}
+
+.compass-center-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card), inset 0 0 0 3px var(--color-primary);
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+.compass-pointer {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 18px solid var(--color-primary);
+  z-index: 2;
+  filter: drop-shadow(0 2px 3px rgba(108, 92, 231, 0.4));
+}
+
+.compass-readout {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-xl);
+}
+
+.compass-heading {
+  font-size: 2.25rem;
+  font-weight: var(--fw-bold);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-primary);
+}
+
+.compass-cardinal {
+  font-size: 1.1rem;
+  font-weight: var(--fw-bold);
+  color: var(--color-primary);
+}
+
+.compass-hint {
+  font-size: var(--fs-caption);
+  color: var(--color-text-secondary);
+  text-align: center;
+  max-width: 260px;
+}
+
 /* ---------- Lanterna ---------- */
 .flashlight-widget {
   padding: var(--space-2xl) var(--space-md) 0;
@@ -788,6 +1075,418 @@
   color: var(--color-text-secondary);
   text-align: center;
   max-width: 260px;
+}
+
+/* ---------- Decibelimetro ---------- */
+.db-meter {
+  padding: var(--space-lg) var(--space-md) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.db-meter__gauge {
+  position: relative;
+  width: 140px;
+  height: 240px;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.db-meter__fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0%;
+  background: linear-gradient(180deg, #ff5f6d 0%, #ffc94a 55%, #2ecc71 100%);
+  opacity: 0.25;
+  transition: height 0.12s ease-out;
+}
+
+.db-meter__value {
+  position: relative;
+  font-size: 2.4rem;
+  font-weight: var(--fw-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+.db-meter__unit {
+  position: relative;
+  font-size: var(--fs-caption);
+  color: var(--color-text-secondary);
+}
+
+.db-meter__label {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-secondary);
+}
+
+.db-meter__hint {
+  font-size: var(--fs-caption);
+  color: var(--color-text-secondary);
+  text-align: center;
+  max-width: 280px;
+}
+
+/* ---------- Calculadora ---------- */
+.calc-widget {
+  padding: 0 var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.calc-display {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-lg) var(--space-md);
+  text-align: right;
+}
+
+.calc-display__expression {
+  font-size: var(--fs-label);
+  color: var(--color-text-secondary);
+  min-height: 1.2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.calc-display__value {
+  font-size: 2.5rem;
+  font-weight: var(--fw-bold);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xs);
+}
+
+.calc-btn {
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) 0;
+  font-size: 1.25rem;
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-primary);
+}
+
+.calc-btn--op {
+  background: var(--accent-purple-soft);
+  color: var(--color-primary);
+}
+
+.calc-btn--equals {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.calc-btn--wide {
+  grid-column: span 2;
+}
+
+/* ---------- Sorteador ---------- */
+.randomizer-widget {
+  padding: 0 var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.randomizer-tabs {
+  display: flex;
+  gap: var(--space-xs);
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-pill);
+  padding: 4px;
+}
+
+.randomizer-tab {
+  flex: 1;
+  text-align: center;
+  padding: 8px 0;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-secondary);
+}
+
+.randomizer-tab[data-active="true"] {
+  background: var(--color-surface);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-card);
+}
+
+.randomizer-result {
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl) var(--space-md);
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: var(--fw-bold);
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-break: break-word;
+}
+
+.randomizer-field {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-md);
+}
+
+.randomizer-field textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 80px;
+  font-size: var(--fs-body);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+}
+
+.randomizer-row {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.randomizer-row .converter__field {
+  flex: 1;
+}
+
+/* ---------- Calculadora de idade ---------- */
+.age-widget {
+  padding: 0 var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.age-field {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-md);
+}
+
+.age-field label {
+  display: block;
+  font-size: var(--fs-caption);
+  color: var(--color-text-secondary);
+  font-weight: var(--fw-medium);
+  margin-bottom: var(--space-xs);
+}
+
+.age-field input {
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-primary);
+}
+
+.age-result {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.age-result__item {
+  flex: 1;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-md) var(--space-xs);
+  text-align: center;
+}
+
+.age-result__value {
+  font-size: 1.6rem;
+  font-weight: var(--fw-bold);
+  color: var(--color-primary);
+}
+
+.age-result__label {
+  font-size: var(--fs-caption);
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}
+
+.age-extra {
+  font-size: var(--fs-caption);
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+/* ---------- Calculadora de desconto ---------- */
+.discount-widget {
+  padding: 0 var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.discount-result {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+}
+
+.discount-result__value {
+  font-size: 2.25rem;
+  font-weight: var(--fw-bold);
+  color: var(--accent-green);
+}
+
+.discount-result__label {
+  font-size: var(--fs-caption);
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}
+
+.discount-result__saved {
+  font-size: var(--fs-label);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-sm);
+}
+
+/* ---------- Cronometro ---------- */
+.stopwatch-widget {
+  padding: var(--space-lg) var(--space-md) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.stopwatch-time {
+  font-size: 3rem;
+  font-weight: var(--fw-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+.stopwatch-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.stopwatch-actions .btn-primary {
+  padding: 12px 28px;
+}
+
+.stopwatch-btn-secondary {
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  color: var(--color-text-primary);
+  padding: 12px 28px;
+  border-radius: var(--radius-pill);
+  font-weight: var(--fw-semibold);
+}
+
+.stopwatch-laps {
+  width: 100%;
+  max-width: 320px;
+}
+
+/* ---------- Conversor de texto ---------- */
+.text-tool-widget {
+  padding: 0 var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.text-tool-widget textarea {
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-md);
+  font-size: var(--fs-body);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+}
+
+.text-tool-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.text-tool-actions button {
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+}
+
+.text-tool-stats {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.text-tool-stats__item {
+  flex: 1;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-sm);
+  text-align: center;
+}
+
+.text-tool-stats__value {
+  font-size: 1.3rem;
+  font-weight: var(--fw-bold);
+}
+
+.text-tool-stats__label {
+  font-size: var(--fs-caption);
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Vibracao ---------- */
+.vibrate-widget {
+  padding: var(--space-2xl) var(--space-md) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.vibrate-patterns {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.vibrate-patterns button {
+  width: 100%;
 }
 
 .bottom-nav {
@@ -850,4 +1549,33 @@
   color: #fff;
   background: var(--color-primary-dark);
   box-shadow: 0 0 0 4px var(--accent-purple-soft), var(--shadow-elevated);
+}
+
+/* ---------- Adaptacao para celular deitado (ver tambem layout.css) ---------- */
+@media (orientation: landscape) and (max-height: 500px) {
+  .bottom-nav {
+    order: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: var(--space-lg);
+    width: 76px;
+    height: 100%;
+    border-top: none;
+    border-right: 1px solid var(--color-border);
+    padding: var(--space-lg) 0;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    padding-left: env(safe-area-inset-left, 0);
+  }
+
+  .nav-item--fab {
+    margin-top: 0;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .app-header {
+    padding-top: var(--space-md);
+  }
 }

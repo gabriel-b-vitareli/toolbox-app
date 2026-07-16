@@ -59,3 +59,29 @@ html, body {
   color: var(--color-text-primary);
   margin-bottom: var(--space-2xs);
 }
+
+/*
+  Celular deitado (paisagem). O limite de altura (max-height) evita que
+  isso dispare em tablets grandes em paisagem, onde o app ainda cabe bem
+  no layout normal - o alvo aqui e especificamente telas de celular.
+
+  A ideia: em pe, a barra de navegacao faz sentido embaixo (dedo alcanca
+  facil). Deitado, embaixo vira "do lado" da tela, entao a barra vira uma
+  faixa vertical lateral, e o conteudo usa a largura extra que sobra.
+*/
+@media (orientation: landscape) and (max-height: 500px) {
+  #app {
+    flex-direction: row;
+    max-width: 100%;
+  }
+
+  #screen-content {
+    order: 2;
+    padding-bottom: var(--space-md);
+  }
+
+  .exit-toast {
+    left: calc(50% + 38px);
+  }
+}
+
