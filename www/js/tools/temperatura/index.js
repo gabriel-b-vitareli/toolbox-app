@@ -50,6 +50,7 @@ registry.register({
       defaultFrom: "c",
       defaultTo: "f",
       idPrefix: "temperatura",
+      toolId: "temperatura",
     });
   },
 });

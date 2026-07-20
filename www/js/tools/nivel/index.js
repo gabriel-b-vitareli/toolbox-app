@@ -29,6 +29,7 @@
 import { icons } from "../../core/icons.js";
 import { registry } from "../../core/registry.js";
 import { needsMotionPermission, requestMotionPermission } from "../../core/motion-permission.js";
+import { recordUsage } from "../../core/history.js";
 
 const MAX_TILT = 45; // graus considerados o "fim da escala" visual (modo disco)
 const TUBE_MAX_TILT = 20; // tubos sao mais sensiveis - faz sentido no uso tipico deitado
@@ -156,6 +157,7 @@ function render(container) {
 
     if (!hasReceivedData) {
       hasReceivedData = true;
+      recordUsage("nivel");
     }
 
     const isFlat = Math.abs(beta) < FLAT_THRESHOLD && Math.abs(gamma) < FLAT_THRESHOLD;

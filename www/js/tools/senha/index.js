@@ -11,6 +11,7 @@
 
 import { icons } from "../../core/icons.js";
 import { registry } from "../../core/registry.js";
+import { recordUsage } from "../../core/history.js";
 
 const CHAR_SETS = {
   lower: "abcdefghijklmnopqrstuvwxyz",
@@ -117,17 +118,25 @@ function render(container) {
 
   lengthInput.addEventListener("input", () => {
     lengthValue.textContent = lengthInput.value;
+    recordUsage("senha");
     regenerate();
   });
 
   [upperCheck, lowerCheck, numbersCheck, symbolsCheck].forEach((el) => {
-    el.addEventListener("change", regenerate);
+    el.addEventListener("change", () => {
+      recordUsage("senha");
+      regenerate();
+    });
   });
 
-  generateBtn.addEventListener("click", regenerate);
+  generateBtn.addEventListener("click", () => {
+    recordUsage("senha");
+    regenerate();
+  });
 
   copyBtn.addEventListener("click", async () => {
     if (!output.textContent || output.textContent === "-") return;
+    recordUsage("senha");
     try {
       await navigator.clipboard.writeText(output.textContent);
       copyBtn.innerHTML = icons.check();

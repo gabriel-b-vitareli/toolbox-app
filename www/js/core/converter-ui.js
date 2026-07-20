@@ -7,6 +7,7 @@
 */
 
 import { icons } from "./icons.js";
+import { recordUsage } from "./history.js";
 
 function formatNumber(value) {
   if (!isFinite(value)) return "0";
@@ -29,8 +30,9 @@ function unitOptions(units, selectedId) {
  * @param {string} options.defaultFrom id da unidade inicial de entrada
  * @param {string} options.defaultTo   id da unidade inicial de saida
  * @param {string} options.idPrefix    prefixo unico para os ids dos inputs (evita colisao entre ferramentas)
+ * @param {string} options.toolId      id da ferramenta no registry, para registrar uso real no historico
  */
-export function createConverterUI(container, { units, convert, defaultFrom, defaultTo, idPrefix }) {
+export function createConverterUI(container, { units, convert, defaultFrom, defaultTo, idPrefix, toolId }) {
   const p = idPrefix;
 
   container.innerHTML = `
@@ -69,16 +71,24 @@ export function createConverterUI(container, { units, convert, defaultFrom, defa
     outputValue.value = formatNumber(result);
   }
 
-  inputValue.addEventListener("input", recalc);
-  inputUnit.addEventListener("change", recalc);
-  outputUnit.addEventListener("change", recalc);
+  // So registra uso em resposta a um evento de verdade do usuario (digitar,
+  // trocar unidade, inverter) - nunca no calculo inicial automatico que
+  // roda so para popular a tela quando ela abre.
+  function handleUserInteraction() {
+    recalc();
+    if (toolId) recordUsage(toolId);
+  }
+
+  inputValue.addEventListener("input", handleUserInteraction);
+  inputUnit.addEventListener("change", handleUserInteraction);
+  outputUnit.addEventListener("change", handleUserInteraction);
 
   swapBtn.addEventListener("click", () => {
     const from = inputUnit.value;
     const to = outputUnit.value;
     inputUnit.value = to;
     outputUnit.value = from;
-    recalc();
+    handleUserInteraction();
   });
 
   recalc();

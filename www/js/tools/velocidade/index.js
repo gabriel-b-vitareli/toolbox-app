@@ -40,6 +40,7 @@ registry.register({
       defaultFrom: "kmh",
       defaultTo: "mph",
       idPrefix: "velocidade",
+      toolId: "velocidade",
     });
   },
 });

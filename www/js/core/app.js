@@ -19,6 +19,8 @@ import { mountCategoryScreen } from "../screens/category.js";
 import { mountToolScreen } from "../screens/tool.js";
 import { mountHistoryScreen } from "../screens/history.js";
 import { mountFavoritesScreen } from "../screens/favorites.js";
+import { mountSearchScreen } from "../screens/search.js";
+import { mountSettingsScreen } from "../screens/settings.js";
 
 // -----------------------------------------------------------------------
 // Registro de ferramentas.
@@ -50,19 +52,9 @@ import "../tools/texto/index.js";
 // -----------------------------------------------------------------------
 router.addScreen("home", { mount: mountHomeScreen, dynamic: true });
 router.addScreen("favoritos", { mount: mountFavoritesScreen, dynamic: true });
-router.addScreen("pesquisa", {
-  mount: mountPlaceholderScreen(
-    "Pesquisa",
-    "A busca por ferramentas sera implementada em uma proxima etapa."
-  ),
-});
+router.addScreen("pesquisa", { mount: mountSearchScreen, dynamic: true });
 router.addScreen("historico", { mount: mountHistoryScreen, dynamic: true });
-router.addScreen("configuracoes", {
-  mount: mountPlaceholderScreen(
-    "Configuracoes",
-    "Preferencias do app, tema e informacoes vao aparecer aqui em breve."
-  ),
-});
+router.addScreen("configuracoes", { mount: mountSettingsScreen });
 router.addScreen("categoria", { mount: mountCategoryScreen, dynamic: true });
 router.addScreen("ferramenta", { mount: mountToolScreen, dynamic: true });
 

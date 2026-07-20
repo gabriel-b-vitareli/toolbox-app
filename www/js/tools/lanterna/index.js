@@ -18,6 +18,7 @@
 import { icons } from "../../core/icons.js";
 import { registry } from "../../core/registry.js";
 import { getUserMediaWithRetry } from "../../core/media-access.js";
+import { recordUsage } from "../../core/history.js";
 
 function render(container) {
   container.innerHTML = `
@@ -63,6 +64,7 @@ function render(container) {
   async function toggle() {
     if (isBusy) return;
     isBusy = true;
+    recordUsage("lanterna");
 
     const ready = await ensureStream();
     if (!ready) {

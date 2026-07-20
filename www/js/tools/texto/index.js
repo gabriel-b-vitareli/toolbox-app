@@ -7,6 +7,7 @@
 
 import { icons } from "../../core/icons.js";
 import { registry } from "../../core/registry.js";
+import { recordUsage } from "../../core/history.js";
 
 function toTitleCase(str) {
   return str.replace(/\S+/g, (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
@@ -58,11 +59,15 @@ function render(container) {
     linesEl.textContent = value === "" ? 0 : value.split("\n").length;
   }
 
-  textarea.addEventListener("input", updateStats);
+  textarea.addEventListener("input", () => {
+    recordUsage("texto");
+    updateStats();
+  });
 
   container.querySelector(".text-tool-actions").addEventListener("click", (event) => {
     const btn = event.target.closest("[data-action]");
     if (!btn) return;
+    recordUsage("texto");
     const action = btn.dataset.action;
 
     if (action === "upper") textarea.value = textarea.value.toUpperCase();

@@ -7,6 +7,7 @@
 
 import { icons } from "../../core/icons.js";
 import { registry } from "../../core/registry.js";
+import { recordUsage } from "../../core/history.js";
 
 function calculateAge(birthDate, today) {
   let years = today.getFullYear() - birthDate.getFullYear();
@@ -74,6 +75,7 @@ function render(container) {
       extraEl.textContent = "";
       return;
     }
+    recordUsage("idade");
     const birthDate = new Date(`${input.value}T00:00:00`);
     const today = new Date();
 

@@ -73,7 +73,7 @@
   gap: var(--space-sm);
   background: var(--color-surface);
   border-radius: var(--radius-lg);
-  padding: 14px var(--space-md);
+  padding: 17px var(--space-md);
   margin: 0 var(--space-md) var(--space-lg);
   box-shadow: var(--shadow-card);
 }
@@ -1078,59 +1078,82 @@
 }
 
 /* ---------- Decibelimetro ---------- */
-.db-meter {
-  padding: var(--space-lg) var(--space-md) 0;
+.db-widget {
+  padding: var(--space-xl) var(--space-md) 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-md);
 }
 
-.db-meter__gauge {
+.db-gauge {
   position: relative;
-  width: 140px;
-  height: 240px;
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  width: 280px;
+  max-width: 78vw;
 }
 
-.db-meter__fill {
+.db-gauge__svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.db-gauge__track {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 14;
+  stroke-linecap: round;
+}
+
+.db-gauge__fill {
+  fill: none;
+  stroke: var(--accent-green);
+  stroke-width: 14;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.12s ease-out, stroke 0.2s ease;
+}
+
+.db-gauge__tick {
+  font-size: 9px;
+  font-weight: var(--fw-semibold);
+  fill: var(--color-text-tertiary);
+}
+
+.db-gauge__readout {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 0%;
-  background: linear-gradient(180deg, #ff5f6d 0%, #ffc94a 55%, #2ecc71 100%);
-  opacity: 0.25;
-  transition: height 0.12s ease-out;
+  left: 50%;
+  bottom: 4%;
+  transform: translateX(-50%);
+  text-align: center;
 }
 
-.db-meter__value {
-  position: relative;
-  font-size: 2.4rem;
+.db-gauge__value {
+  font-size: 2.5rem;
   font-weight: var(--fw-bold);
   font-variant-numeric: tabular-nums;
+  color: var(--color-text-primary);
+  transition: color 0.2s ease;
+  line-height: 1;
 }
 
-.db-meter__unit {
-  position: relative;
+.db-gauge__unit {
   font-size: var(--fs-caption);
   color: var(--color-text-secondary);
+  margin-top: 2px;
 }
 
-.db-meter__label {
+.db-status {
   font-size: var(--fs-label);
   font-weight: var(--fw-semibold);
   color: var(--color-text-secondary);
+  background: var(--color-surface-alt);
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  transition: color 0.2s ease;
 }
 
-.db-meter__hint {
+.db-hint {
   font-size: var(--fs-caption);
   color: var(--color-text-secondary);
   text-align: center;
@@ -1142,10 +1165,12 @@
   padding: 0 var(--space-md);
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--space-sm);
+  min-height: 300px;
 }
 
 .calc-display {
+  flex-shrink: 0;
   background: var(--color-surface);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
@@ -1154,9 +1179,9 @@
 }
 
 .calc-display__expression {
-  font-size: var(--fs-label);
+  font-size: var(--fs-body);
   color: var(--color-text-secondary);
-  min-height: 1.2em;
+  min-height: 1.3em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1168,20 +1193,23 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  line-height: 1.15;
 }
 
 .calc-grid {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-xs);
+  grid-template-rows: repeat(5, 1fr);
+  gap: var(--space-sm);
+  min-height: 0;
 }
 
 .calc-btn {
   background: var(--color-surface);
   box-shadow: var(--shadow-card);
   border-radius: var(--radius-md);
-  padding: var(--space-md) 0;
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: var(--fw-semibold);
   color: var(--color-text-primary);
 }
@@ -1370,28 +1398,83 @@
 
 /* ---------- Cronometro ---------- */
 .stopwatch-widget {
-  padding: var(--space-lg) var(--space-md) 0;
+  padding: var(--space-xl) var(--space-md) 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-lg);
+  gap: var(--space-2xl);
 }
 
-.stopwatch-time {
-  font-size: 3rem;
+.stopwatch-face {
+  width: 220px;
+  height: 220px;
+  max-width: 66vw;
+  max-height: 66vw;
+  border-radius: 50%;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-elevated);
+  border: 8px solid var(--color-surface-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stopwatch-face__time {
+  font-size: 1.9rem;
   font-weight: var(--fw-bold);
   font-variant-numeric: tabular-nums;
 }
 
-.stopwatch-actions {
+.stopwatch-controls {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  gap: var(--space-sm);
+  gap: var(--space-2xl);
 }
 
-.stopwatch-actions .btn-primary {
-  padding: 12px 28px;
+.stopwatch-btn-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stopwatch-btn-circle svg {
+  width: 20px;
+  height: 20px;
+}
+
+.stopwatch-btn-circle:disabled {
+  opacity: 0.35;
+}
+
+.stopwatch-btn-play {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: var(--shadow-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease;
+}
+
+.stopwatch-btn-play svg {
+  width: 28px;
+  height: 28px;
+}
+
+.stopwatch-btn-play[data-running="true"] {
+  background: #ef4444;
 }
 
 .stopwatch-btn-secondary {
@@ -1507,20 +1590,31 @@
   gap: 4px;
   color: var(--color-text-secondary);
   padding: var(--space-2xs);
+  transition: color 0.2s ease;
 }
 
 .nav-item svg {
   width: 22px;
   height: 22px;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .nav-item span {
   font-size: 0.7rem;
   font-weight: var(--fw-medium);
+  transition: color 0.2s ease;
+}
+
+.nav-item:active svg {
+  transform: scale(0.85);
 }
 
 .nav-item[data-active="true"] {
   color: var(--color-primary);
+}
+
+.nav-item[data-active="true"] svg {
+  transform: scale(1.14);
 }
 
 .nav-item--fab {
@@ -1533,7 +1627,11 @@
   justify-content: center;
   box-shadow: var(--shadow-elevated);
   margin-top: -24px;
-  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.nav-item--fab:active {
+  transform: scale(0.92);
 }
 
 .nav-item--fab svg {

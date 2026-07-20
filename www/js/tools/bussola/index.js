@@ -15,6 +15,7 @@
 import { icons } from "../../core/icons.js";
 import { registry } from "../../core/registry.js";
 import { needsMotionPermission, requestMotionPermission } from "../../core/motion-permission.js";
+import { recordUsage } from "../../core/history.js";
 
 const DIRECTIONS = ["N", "NE", "L", "SE", "S", "SO", "O", "NO"];
 
@@ -65,6 +66,7 @@ function render(container) {
   function updateCompass(heading) {
     if (!hasReceivedData) {
       hasReceivedData = true;
+      recordUsage("bussola");
       hint.textContent = "Longe de metais e eletronicos, a leitura fica mais precisa.";
     }
     face.style.transform = `rotate(${-heading}deg)`;

@@ -9,6 +9,12 @@
   alteracoes no resto do projeto": este arquivo nunca muda quando uma
   nova ferramenta e criada.
 
+  Sobre o historico: esta tela NAO registra uso automaticamente so por
+  abrir a ferramenta. Cada ferramenta e responsavel por chamar
+  core/history.js -> recordUsage() no momento certo (quando o usuario
+  realmente clica em algo, digita um valor, gera um resultado etc) -
+  assim o historico reflete uso de verdade, nao so "dei uma olhada".
+
   Ciclo de vida: uma ferramenta pode opcionalmente retornar uma funcao de
   limpeza no render() (por exemplo, para parar de escutar um sensor).
   Essa funcao e guardada aqui e chamada automaticamente sempre que o
@@ -21,7 +27,6 @@ import { icons } from "../core/icons.js";
 import { registry } from "../core/registry.js";
 import { getCategoryById } from "../core/categories.js";
 import { router } from "../core/router.js";
-import { recordUsage } from "../core/history.js";
 import { isFavorite, toggle as toggleFavorite } from "../core/favorites.js";
 
 let activeCleanup = null;
@@ -92,7 +97,4 @@ export function mountToolScreen(container, toolId) {
   if (typeof maybeCleanup === "function") {
     activeCleanup = maybeCleanup;
   }
-
-  // Registra o uso para "Continuar usando" e o Historico.
-  recordUsage(tool.id);
 }

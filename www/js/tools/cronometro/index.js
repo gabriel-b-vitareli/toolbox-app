@@ -1,12 +1,17 @@
 /*
   tools/cronometro/index.js
-  Cronometro simples: iniciar, pausar, zerar e marcar voltas.
+  Cronometro com mostrador circular (como um cronometro de verdade) e
+  controles em botoes circulares de TAMANHO FIXO - troca so o icone
+  (play/pause), nunca o texto, entao o botao nunca muda de tamanho ao
+  clicar.
+
   Nao depende de nenhum sensor - so setInterval + Date.now() para manter
   precisao mesmo se o navegador atrasar um tick ocasional.
 */
 
 import { icons } from "../../core/icons.js";
 import { registry } from "../../core/registry.js";
+import { recordUsage } from "../../core/history.js";
 
 function formatTime(ms) {
   const totalCentis = Math.floor(ms / 10);
@@ -21,13 +26,19 @@ function formatTime(ms) {
 function render(container) {
   container.innerHTML = `
     <div class="stopwatch-widget">
-      <div class="stopwatch-time" id="stopwatch-time">00:00,00</div>
+      <div class="stopwatch-face">
+        <div class="stopwatch-face__time" id="stopwatch-time">00:00,00</div>
+      </div>
 
-      <div class="stopwatch-actions">
-        <button class="stopwatch-btn-secondary" type="button" id="stopwatch-lap-btn">Marcar volta</button>
-        <button class="btn-primary" type="button" id="stopwatch-toggle-btn">
-          ${icons.stopwatch()}
-          Iniciar
+      <div class="stopwatch-controls">
+        <button class="stopwatch-btn-circle" type="button" id="stopwatch-reset-btn" aria-label="Zerar">
+          ${icons.refresh()}
+        </button>
+        <button class="stopwatch-btn-play" type="button" id="stopwatch-toggle-btn" data-running="false" aria-label="Iniciar">
+          ${icons.play()}
+        </button>
+        <button class="stopwatch-btn-circle" type="button" id="stopwatch-lap-btn" aria-label="Marcar volta" disabled>
+          ${icons.flag()}
         </button>
       </div>
 
@@ -40,6 +51,7 @@ function render(container) {
   const timeEl = container.querySelector("#stopwatch-time");
   const toggleBtn = container.querySelector("#stopwatch-toggle-btn");
   const lapBtn = container.querySelector("#stopwatch-lap-btn");
+  const resetBtn = container.querySelector("#stopwatch-reset-btn");
   const lapsList = container.querySelector("#stopwatch-laps-list");
 
   let running = false;
@@ -56,18 +68,26 @@ function render(container) {
     timeEl.textContent = formatTime(currentElapsed());
   }
 
+  function setToggleUI() {
+    toggleBtn.setAttribute("data-running", String(running));
+    toggleBtn.innerHTML = running ? icons.pause() : icons.play();
+    toggleBtn.setAttribute("aria-label", running ? "Pausar" : "Iniciar");
+    lapBtn.disabled = !running;
+  }
+
   function start() {
+    recordUsage("cronometro");
     running = true;
     startedAt = Date.now();
     intervalId = setInterval(tick, 30);
-    toggleBtn.innerHTML = `${icons.stopwatch()} Pausar`;
+    setToggleUI();
   }
 
   function pause() {
     running = false;
     elapsedBeforePause = currentElapsed();
     clearInterval(intervalId);
-    toggleBtn.innerHTML = `${icons.stopwatch()} Continuar`;
+    setToggleUI();
   }
 
   function reset() {
@@ -77,7 +97,7 @@ function render(container) {
     laps = [];
     timeEl.textContent = formatTime(0);
     lapsList.innerHTML = "";
-    toggleBtn.innerHTML = `${icons.stopwatch()} Iniciar`;
+    setToggleUI();
   }
 
   function renderLaps() {
@@ -109,17 +129,9 @@ function render(container) {
     renderLaps();
   });
 
-  toggleBtn.addEventListener("dblclick", reset);
-
-  // Duplo-clique e pouco descobrivel - deixa um botao de zerar acessivel
-  // por toque longo tambem seria bom, mas por simplicidade um segundo
-  // botao e mais claro. Adicionado abaixo dinamicamente:
-  const resetBtn = document.createElement("button");
-  resetBtn.className = "stopwatch-btn-secondary";
-  resetBtn.type = "button";
-  resetBtn.textContent = "Zerar";
   resetBtn.addEventListener("click", reset);
-  container.querySelector(".stopwatch-actions").appendChild(resetBtn);
+
+  setToggleUI();
 
   return function cleanup() {
     clearInterval(intervalId);

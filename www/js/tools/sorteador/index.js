@@ -8,6 +8,7 @@
 
 import { icons } from "../../core/icons.js";
 import { registry } from "../../core/registry.js";
+import { recordUsage } from "../../core/history.js";
 
 const MODES = [
   { id: "moeda", label: "Moeda" },
@@ -102,7 +103,10 @@ function render(container) {
     });
   });
 
-  goBtn.addEventListener("click", draw);
+  goBtn.addEventListener("click", () => {
+    recordUsage("sorteador");
+    draw();
+  });
 
   renderOptions();
 }

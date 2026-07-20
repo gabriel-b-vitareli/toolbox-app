@@ -43,6 +43,7 @@ registry.register({
       defaultFrom: "l",
       defaultTo: "ml",
       idPrefix: "volume",
+      toolId: "volume",
     });
   },
 });

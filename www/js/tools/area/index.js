@@ -43,6 +43,7 @@ registry.register({
       defaultFrom: "m2",
       defaultTo: "ha",
       idPrefix: "area",
+      toolId: "area",
     });
   },
 });

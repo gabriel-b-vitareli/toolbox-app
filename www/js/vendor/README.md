@@ -18,12 +18,12 @@ sabe resolver sem bundler) para um caminho relativo comum.
 
 - `capacitor-core.js` - copia identica de `@capacitor/core/dist/index.js`.
   Nao precisou de nenhuma edicao (nao tem imports externos).
-- `capacitor-app.js` - copia de `@capacitor/app/dist/esm/index.js`, com o
-  import de `@capacitor/core` reescrito para `./capacitor-core.js`.
-- `capacitor-app-web.js` - implementacao de fallback usada apenas quando
-  o app roda num navegador comum (nao dentro do Android/iOS nativo).
-- `capacitor-app-definitions.js` - apenas tipos, sem codigo (mantido para
-  o `export *` do capacitor-app.js nao quebrar).
+- `capacitor-app.js` / `capacitor-app-web.js` / `capacitor-app-definitions.js`
+  - plugin App (botao fisico de voltar).
+- `capacitor-haptics.js` / `capacitor-haptics-web.js` / `capacitor-haptics-definitions.js`
+  - plugin Haptics (usado pela ferramenta Vibracao - aciona o motor de
+    vibracao nativo, em vez de depender de `navigator.vibrate` do
+    WebView, que se mostrou inconsistente entre aparelhos).
 
 ## Como atualizar quando o plugin @capacitor/app for atualizado
 

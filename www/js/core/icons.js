@@ -307,4 +307,21 @@ export const icons = {
       <line x1="21.5" y1="9" x2="21.5" y2="15"/>
       <line x1="19" y1="7" x2="19" y2="17"/>
     </svg>`,
+
+  play: () => `
+    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+      <polygon points="6.5 4 20 12 6.5 20"/>
+    </svg>`,
+
+  pause: () => `
+    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+      <rect x="5.5" y="4" width="5" height="16" rx="1.5"/>
+      <rect x="13.5" y="4" width="5" height="16" rx="1.5"/>
+    </svg>`,
+
+  flag: () => `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 21V4"/>
+      <path d="M5 4h13l-3 4.5L18 13H5"/>
+    </svg>`,
 };

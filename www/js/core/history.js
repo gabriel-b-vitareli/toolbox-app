@@ -29,32 +29,25 @@ function writeAll(entries) {
 }
 
 /**
- * Registra o uso de uma ferramenta agora mesmo.
- * Cada uso vira uma entrada nova (nao substitui a anterior), para que o
- * historico completo reflita quando cada uso aconteceu.
+ * Registra o uso de uma ferramenta agora mesmo. Se a ferramenta ja tiver
+ * uma entrada no historico, so atualiza o horario dela (nao duplica) -
+ * o historico mostra CADA ferramenta usada uma unica vez, na hora mais
+ * recente em que foi usada.
  */
 export function recordUsage(toolId) {
-  const entries = readAll();
+  const entries = readAll().filter((entry) => entry.toolId !== toolId);
   entries.unshift({ toolId, timestamp: Date.now() });
   writeAll(entries.slice(0, MAX_ENTRIES));
 }
 
-/** Todas as entradas, mais recente primeiro. */
+/** Todas as entradas, mais recente primeiro. Ja vem sem duplicatas. */
 export function getAll() {
   return readAll().sort((a, b) => b.timestamp - a.timestamp);
 }
 
-/** Ate `limit` entradas, sem repetir a mesma ferramenta duas vezes. */
+/** Ate `limit` entradas mais recentes (sem duplicatas, ja e o padrao). */
 export function getRecentUnique(limit = 5) {
-  const seen = new Set();
-  const result = [];
-  for (const entry of getAll()) {
-    if (seen.has(entry.toolId)) continue;
-    seen.add(entry.toolId);
-    result.push(entry);
-    if (result.length >= limit) break;
-  }
-  return result;
+  return getAll().slice(0, limit);
 }
 
 export function clear() {

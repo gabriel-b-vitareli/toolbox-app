@@ -6,6 +6,7 @@
 
 import { icons } from "../../core/icons.js";
 import { registry } from "../../core/registry.js";
+import { recordUsage } from "../../core/history.js";
 
 function formatCurrency(value) {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
@@ -51,8 +52,8 @@ function render(container) {
     savedEl.textContent = `Voce economiza ${formatCurrency(saved)}`;
   }
 
-  priceInput.addEventListener("input", recalc);
-  percentInput.addEventListener("input", recalc);
+  priceInput.addEventListener("input", () => { recordUsage("desconto"); recalc(); });
+  percentInput.addEventListener("input", () => { recordUsage("desconto"); recalc(); });
   recalc();
 }
 

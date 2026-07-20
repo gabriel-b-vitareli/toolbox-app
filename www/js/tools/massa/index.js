@@ -41,6 +41,7 @@ registry.register({
       defaultFrom: "kg",
       defaultTo: "lb",
       idPrefix: "massa",
+      toolId: "massa",
     });
   },
 });

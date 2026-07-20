@@ -44,6 +44,7 @@ registry.register({
       defaultFrom: "m",
       defaultTo: "km",
       idPrefix: "comprimento",
+      toolId: "comprimento",
     });
   },
 });

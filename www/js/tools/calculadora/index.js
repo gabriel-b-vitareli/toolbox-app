@@ -7,6 +7,7 @@
 
 import { icons } from "../../core/icons.js";
 import { registry } from "../../core/registry.js";
+import { recordUsage } from "../../core/history.js";
 
 const BUTTONS = [
   { label: "C", type: "clear" },
@@ -38,7 +39,7 @@ function formatValue(n) {
 
 function render(container) {
   container.innerHTML = `
-    <div class="calc-widget">
+    <div class="calc-widget" id="calc-widget">
       <div class="calc-display">
         <div class="calc-display__expression" id="calc-expression">&nbsp;</div>
         <div class="calc-display__value" id="calc-value">0</div>
@@ -54,6 +55,25 @@ function render(container) {
       </div>
     </div>
   `;
+
+  const widget = container.querySelector("#calc-widget");
+
+  // Encaixa a calculadora exatamente no espaco visivel da tela (nem
+  // grande, nem pequena demais, sem precisar rolar). Mede a distancia
+  // real entre o topo da calculadora e o topo da barra de navegacao -
+  // isso e mais confiavel do que tentar somar/subtrair alturas de
+  // cabecalho e paddings "no chute".
+  function fitToScreen() {
+    const nav = document.getElementById("bottom-nav");
+    const widgetTop = widget.getBoundingClientRect().top;
+    const navTop = nav ? nav.getBoundingClientRect().top : window.innerHeight;
+    const breathingRoom = 22;
+    const available = navTop - widgetTop - breathingRoom;
+    widget.style.height = `${Math.max(300, available)}px`;
+  }
+
+  requestAnimationFrame(fitToScreen); // espera a tela ficar visivel de verdade (ver router.js) antes de medir
+  window.addEventListener("resize", fitToScreen);
 
   const expressionEl = container.querySelector("#calc-expression");
   const valueEl = container.querySelector("#calc-value");
@@ -128,6 +148,7 @@ function render(container) {
   grid.addEventListener("click", (event) => {
     const btn = event.target.closest("[data-type]");
     if (!btn) return;
+    recordUsage("calculadora");
     const { type, value } = btn.dataset;
 
     switch (type) {
@@ -160,6 +181,10 @@ function render(container) {
   });
 
   updateDisplay();
+
+  return function cleanup() {
+    window.removeEventListener("resize", fitToScreen);
+  };
 }
 
 registry.register({
