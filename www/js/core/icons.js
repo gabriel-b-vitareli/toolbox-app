@@ -324,4 +324,29 @@ export const icons = {
       <path d="M5 21V4"/>
       <path d="M5 4h13l-3 4.5L18 13H5"/>
     </svg>`,
+
+  sun: () => `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4.5"/>
+      <line x1="12" y1="2.5" x2="12" y2="5"/>
+      <line x1="12" y1="19" x2="12" y2="21.5"/>
+      <line x1="4.2" y1="4.2" x2="6" y2="6"/>
+      <line x1="18" y1="18" x2="19.8" y2="19.8"/>
+      <line x1="2.5" y1="12" x2="5" y2="12"/>
+      <line x1="19" y1="12" x2="21.5" y2="12"/>
+      <line x1="4.2" y1="19.8" x2="6" y2="18"/>
+      <line x1="18" y1="6" x2="19.8" y2="4.2"/>
+    </svg>`,
+
+  moon: () => `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.5 14.5a8.5 8.5 0 1 1-9-11 7 7 0 0 0 9 11Z"/>
+    </svg>`,
+
+  systemTheme: () => `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2.5" y="4.5" width="19" height="12.5" rx="2"/>
+      <line x1="8" y1="21" x2="16" y2="21"/>
+      <line x1="12" y1="17" x2="12" y2="21"/>
+    </svg>`,
 };

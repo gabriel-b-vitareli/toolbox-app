@@ -5,6 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Toolbox</title>
 
+  <!--
+    Aplica o tema salvo o mais cedo possivel, antes do CSS ser pintado
+    na tela - sem isso, o app sempre abriria no modo claro por uma
+    fracao de segundo antes de trocar para o escuro (efeito de "flash").
+    Fica aqui (inline, nao um arquivo .js separado) de proposito: um
+    <script src="..."> externo ainda precisaria de uma requisicao extra
+    antes de rodar, e o objetivo e nao perder nem um quadro.
+  -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("toolbox:theme");
+        var effective = saved === "dark" || saved === "light"
+          ? saved
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", effective);
+      } catch (err) {
+        // localStorage indisponivel (ex: modo privado) - segue no claro, padrao.
+      }
+    })();
+  </script>
+
   <link rel="stylesheet" href="css/variables.css" />
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/components.css" />

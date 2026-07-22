@@ -694,6 +694,21 @@
   border-radius: var(--radius-pill);
   font-weight: var(--fw-semibold);
   font-size: var(--fs-body);
+  transition: opacity 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+}
+
+.btn-primary svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.btn-primary:disabled {
+  opacity: 0.55;
 }
 
 /* ---------- Aviso de "toque novamente para sair" ---------- */
@@ -1025,11 +1040,28 @@
 
 /* ---------- Lanterna ---------- */
 .flashlight-widget {
-  padding: var(--space-2xl) var(--space-md) 0;
+  padding: var(--space-lg) var(--space-md) 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-lg);
+}
+
+.flashlight-modes,
+.flashlight-speeds {
+  display: flex;
+  gap: var(--space-xs);
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-pill);
+  padding: 4px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.flashlight-modes .randomizer-tab,
+.flashlight-speeds .randomizer-tab {
+  flex: 1;
+  text-align: center;
 }
 
 .flashlight-toggle {
@@ -1273,6 +1305,48 @@
   align-items: center;
   justify-content: center;
   word-break: break-word;
+  border: 3px solid transparent;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.randomizer-result[data-mode="moeda"] {
+  background: var(--accent-purple-soft);
+  border-color: var(--accent-purple);
+  color: var(--accent-purple);
+}
+
+.randomizer-result[data-mode="dado"] {
+  background: var(--accent-orange-soft);
+  border-color: var(--accent-orange);
+  color: #b8611f;
+}
+
+.randomizer-result[data-mode="numero"] {
+  background: var(--accent-blue-soft);
+  border-color: var(--accent-blue);
+  color: #2a6bb8;
+}
+
+.randomizer-result[data-mode="lista"] {
+  background: var(--accent-green-soft);
+  border-color: var(--accent-green);
+  color: #1f9c53;
+}
+
+@keyframes randomizer-pop {
+  0% {
+    transform: scale(0.85);
+  }
+  55% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.randomizer-result--pop {
+  animation: randomizer-pop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .randomizer-field {
@@ -1572,6 +1646,65 @@
   width: 100%;
 }
 
+.vibrate-tip {
+  width: 100%;
+  max-width: 320px;
+  background: var(--accent-orange-soft);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  font-size: var(--fs-caption);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.vibrate-tip strong {
+  color: var(--color-text-primary);
+}
+
+/* ---------- Seletor de tema ---------- */
+.theme-picker {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+}
+
+.theme-picker__option {
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-xs);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  border: 2px solid transparent;
+  color: var(--color-text-secondary);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.theme-picker__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.theme-picker__label {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+}
+
+.theme-picker__option[data-active="true"] {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: var(--accent-purple-soft);
+}
+
+.theme-picker__hint {
+  font-size: var(--fs-caption);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-sm);
+  text-align: center;
+}
+
 .bottom-nav {
   flex-shrink: 0;
   height: var(--bottom-nav-height);
@@ -1676,4 +1809,27 @@
   .app-header {
     padding-top: var(--space-md);
   }
+}
+
+/*
+  ---------- Ajustes pontuais para o modo escuro ----------
+  A grande maioria das cores do app vem das variaveis em variables.css e
+  ja se adapta sozinha. Estes poucos casos usam uma cor fixa (escolhida
+  para contraste sobre um fundo CLARO) que precisa de uma versao
+  diferente para continuar legivel sobre fundo escuro.
+*/
+[data-theme="dark"] .flashlight-status[data-on="true"] {
+  color: #ffd166;
+}
+
+[data-theme="dark"] .randomizer-result[data-mode="dado"] {
+  color: #ffb37a;
+}
+
+[data-theme="dark"] .randomizer-result[data-mode="numero"] {
+  color: #7fb2f0;
+}
+
+[data-theme="dark"] .randomizer-result[data-mode="lista"] {
+  color: #6fe3a3;
 }

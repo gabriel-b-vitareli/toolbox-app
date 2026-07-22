@@ -13,6 +13,7 @@
 import { router } from "./router.js";
 import { icons } from "./icons.js";
 import { initBackButton } from "./back-button.js";
+import { initTheme } from "./theme.js";
 import { mountHomeScreen } from "../screens/home.js";
 import { mountPlaceholderScreen } from "../screens/placeholder.js";
 import { mountCategoryScreen } from "../screens/category.js";
@@ -97,6 +98,7 @@ function updateActiveNavItem(screenId) {
 // Boot
 // -----------------------------------------------------------------------
 function boot() {
+  initTheme();
   renderBottomNav();
   router.onChange(updateActiveNavItem);
   router.start("home");

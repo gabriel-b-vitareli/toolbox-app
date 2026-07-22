@@ -79,3 +79,41 @@
   --bottom-nav-height: 76px;
   --max-content-width: 480px;
 }
+
+/*
+  Modo escuro. Ativado colocando data-theme="dark" na tag <html>
+  (ver core/theme.js). Como o resto do CSS do app inteiro consulta
+  estas variaveis (nunca cores fixas), trocar so este bloco já
+  reconfigura praticamente toda a interface.
+*/
+:root[data-theme="dark"] {
+  --color-bg: #131218;
+  --color-surface: #1E1C26;
+  --color-surface-alt: #26232F;
+
+  --color-primary: #8B7CF6;
+  --color-primary-dark: #7666E0;
+  --color-on-primary: #FFFFFF;
+
+  --color-text-primary: #F1F0F7;
+  --color-text-secondary: #A6A3B8;
+  --color-text-tertiary: #716E82;
+
+  --color-border: #332F3F;
+  --color-divider: #2A2836;
+
+  /* Os tons "soft" viravam versoes translucidas da propria cor, em vez
+     de tintas claras solidas (que ficariam "lavadas" sobre fundo escuro). */
+  --accent-purple-soft: rgba(139, 124, 246, 0.22);
+  --accent-orange-soft: rgba(255, 159, 67, 0.2);
+  --accent-green-soft: rgba(46, 204, 113, 0.2);
+  --accent-blue-soft: rgba(74, 144, 226, 0.24);
+  --accent-magenta-soft: rgba(192, 132, 252, 0.22);
+  --accent-gray-soft: rgba(166, 163, 184, 0.16);
+
+  /* Sombra pura preta quase nao aparece sobre fundo ja escuro - troca
+     por um contorno bem sutil (efeito de "borda de luz") para dar
+     profundidade aos cards. */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.045);
+  --shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
